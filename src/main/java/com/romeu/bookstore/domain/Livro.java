@@ -3,6 +3,8 @@ package com.romeu.bookstore.domain;
 import java.io.Serializable;
 import java.util.Objects;
 
+import org.hibernate.validator.constraints.Length;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
@@ -11,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 public class Livro implements Serializable {
@@ -23,8 +26,16 @@ public class Livro implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+
+	@NotEmpty(message = "Campo título é obrigatório")
+	@Length(min = 3, max = 200, message = "O campo título deve ter entre 3 e 100 caracteres")
 	private String titulo;
+
+	@NotEmpty(message = "Campo é obrigatório")
+	@Length(min = 3, max = 200, message = "O campo deve ter entre 3 e 100 caracteres")
 	private String nome_autor;
+
+	@NotEmpty(message = "Campo é obrigatório")
 	private String texto;
 
 	@JsonIgnore
